@@ -11,4 +11,12 @@ public class TodoService {
     this.repo = repo;
   }
 
+  public Todo createTodo(CreateTodoDTO data) {
+    Todo newTodo = new Todo();
+
+    newTodo.setTitle(data.getTitle());
+    newTodo.setCategory(data.getCategory());
+
+    return this.repo.save(newTodo);
+  }
 }

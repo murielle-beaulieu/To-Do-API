@@ -59,4 +59,29 @@ public class Todo {
 
   }
 
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
+  public Boolean getIsArchived() {
+    return isArchived;
+  }
+
+  public void setIsArchived(Boolean isArchived) {
+    this.isArchived = isArchived;
+  }
+
+
 }
