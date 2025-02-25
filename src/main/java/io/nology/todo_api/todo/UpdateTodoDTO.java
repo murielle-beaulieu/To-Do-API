@@ -1,14 +1,18 @@
 package io.nology.todo_api.todo;
 
 import io.nology.todo_api.todo.Todo.TodoCategory;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-public class CreateTodoDTO {
+public class UpdateTodoDTO {
 
-  @NotBlank
+  @NotEmpty
   private String title;
 
   private TodoCategory category;
+
+  @NotNull
+  private Boolean isArchived;
 
   public String getTitle() {
     return title;
@@ -16,6 +20,10 @@ public class CreateTodoDTO {
 
   public TodoCategory getCategory() {
     return category;
+  }
+
+  public Boolean getIsArchived() {
+    return isArchived;
   }
 
 }

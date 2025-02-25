@@ -4,9 +4,13 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -14,16 +18,11 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name="todos")
 
-// To-do
-// id: Long
-// title: String
-// isArchived: boolean
-// category: String
-
 public class Todo {
 
-  public enum Category {
+  public enum TodoCategory {
     WORK,
+    HOME,
     LEARNING,
     WELLBEING,
     SOCIAL_LIFE
@@ -34,6 +33,9 @@ public class Todo {
   private Long id;
 
   @Column
+  private String title;
+
+  @Column
   @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;
 
@@ -41,16 +43,13 @@ public class Todo {
   @Temporal(TemporalType.TIMESTAMP)
   private Date updatedAt;
 
-  @Column
-  private String title;
-
-  @Column
-  private Category category;
+  @Enumerated(EnumType.STRING)
+  private TodoCategory category;
 
   @Column
   private Boolean isArchived;
 
-  public Todo(String title, Category category) {
+  public Todo(String title, TodoCategory category) {
     this.title = title;
     this.category = category;
   }
@@ -58,6 +57,27 @@ public class Todo {
   public Todo() {
 
   }
+
+  @PrePersist
+  public void onCreate() {
+    Date timestamp = new Date();
+    createdAt = timestamp;
+    updatedAt = timestamp;
+  }
+
+  @PreUpdate
+  public void onUpdate() {
+    updatedAt = new Date();
+  }
+
+  public Date getCreatedAt() {
+    return createdAt;
+  }
+
+  public Date getUpdatedAt() {
+    return updatedAt;
+  }
+
 
   public String getTitle() {
     return title;
@@ -67,12 +87,8 @@ public class Todo {
     this.title = title;
   }
 
-  public Category getCategory() {
+  public TodoCategory getCategory() {
     return category;
-  }
-
-  public void setCategory(Category category) {
-    this.category = category;
   }
 
   public Boolean getIsArchived() {
@@ -83,5 +99,8 @@ public class Todo {
     this.isArchived = isArchived;
   }
 
+  public void setCategory(TodoCategory category) {
+    this.category = category;
+  }
 
 }
