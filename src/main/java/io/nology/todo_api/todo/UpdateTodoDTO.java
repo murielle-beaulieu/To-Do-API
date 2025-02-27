@@ -1,17 +1,13 @@
 package io.nology.todo_api.todo;
 
 import io.nology.todo_api.todo.Todo.TodoCategory;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class UpdateTodoDTO {
 
-  @NotEmpty
   private String title;
 
   private TodoCategory category;
 
-  @NotNull
   private Boolean isArchived;
 
   public String getTitle() {
@@ -24,6 +20,18 @@ public class UpdateTodoDTO {
 
   public Boolean getIsArchived() {
     return isArchived;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public void setCategory(TodoCategory category) {
+    this.category = category;
+  }
+
+  public void setIsArchived(Boolean isArchived) {
+    this.isArchived = isArchived;
   }
 
 }

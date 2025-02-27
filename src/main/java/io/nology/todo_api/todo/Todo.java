@@ -47,7 +47,7 @@ public class Todo {
   private TodoCategory category;
 
   @Column
-  private Boolean isArchived;
+  private Boolean isArchived = false;
 
   public Todo(String title, TodoCategory category) {
     this.title = title;
@@ -88,11 +88,11 @@ public class Todo {
   }
 
   public TodoCategory getCategory() {
-    return category;
+    return this.category;
   }
 
   public Boolean getIsArchived() {
-    return isArchived;
+    return this.isArchived;
   }
 
   public void setIsArchived(Boolean isArchived) {
