@@ -1,12 +1,12 @@
 package io.nology.todo_api.todo;
 
-import io.nology.todo_api.todo.Todo.TodoCategory;
+import io.nology.todo_api.category.Category;
 
 public class UpdateTodoDTO {
 
   private String title;
 
-  private TodoCategory category;
+  private Category category_id;
 
   private Boolean isArchived;
 
@@ -14,8 +14,8 @@ public class UpdateTodoDTO {
     return title;
   }
 
-  public TodoCategory getCategory() {
-    return category;
+  public Category getCategoryId() {
+    return category_id;
   }
 
   public Boolean getIsArchived() {
@@ -26,8 +26,8 @@ public class UpdateTodoDTO {
     this.title = title;
   }
 
-  public void setCategory(TodoCategory category) {
-    this.category = category;
+  public void setCategoryId(Category category_id) {
+    this.category_id = category_id;
   }
 
   public void setIsArchived(Boolean isArchived) {

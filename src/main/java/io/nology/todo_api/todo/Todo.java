@@ -2,31 +2,26 @@ package io.nology.todo_api.todo;
 
 import java.util.Date;
 
+import io.nology.todo_api.category.Category;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+
 @Entity
 @Table(name="todos")
 
 public class Todo {
-
-  public enum TodoCategory {
-    WORK,
-    HOME,
-    LEARNING,
-    WELLBEING,
-    SOCIAL_LIFE
-  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,19 +38,32 @@ public class Todo {
   @Temporal(TemporalType.TIMESTAMP)
   private Date updatedAt;
 
-  @Enumerated(EnumType.STRING)
-  private TodoCategory category;
+  @Column
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date archivedAt;
+
+  @ManyToOne()
+  @JoinColumn(name = "category_id")
+  private Category category;
 
   @Column
   private Boolean isArchived = false;
 
-  public Todo(String title, TodoCategory category) {
-    this.title = title;
-    this.category = category;
+    public Todo(String title, Category category) {
+      this.title = title;
+      this.category = category;
   }
 
   public Todo() {
 
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
   @PrePersist
@@ -87,9 +95,6 @@ public class Todo {
     this.title = title;
   }
 
-  public TodoCategory getCategory() {
-    return this.category;
-  }
 
   public Boolean getIsArchived() {
     return this.isArchived;
@@ -97,10 +102,6 @@ public class Todo {
 
   public void setIsArchived(Boolean isArchived) {
     this.isArchived = isArchived;
-  }
-
-  public void setCategory(TodoCategory category) {
-    this.category = category;
   }
 
 }

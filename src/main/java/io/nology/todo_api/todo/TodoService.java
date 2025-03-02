@@ -5,13 +5,18 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import io.nology.todo_api.category.Category;
+import io.nology.todo_api.category.CategoryService;
+
 @Service
 public class TodoService {
 
   private TodoRepository repo;
+  private CategoryService categoryService;
 
-  TodoService(TodoRepository repo) {
-    this.repo = repo;
+  TodoService(TodoRepository repo, CategoryService categoryService) {
+      this.repo = repo;
+      this.categoryService = categoryService;
   }
 
   public List<Todo> getAll() {
@@ -24,11 +29,17 @@ public class TodoService {
 
   public Todo createTodo(CreateTodoDTO data) {
     Todo newTodo = new Todo();
+    Category foundCategory = this.categoryService.getById(data.getCategoryId());
+
+    if(foundCategory == null) {
+      System.out.println("this is the problem");
+    }
 
     newTodo.setTitle(data.getTitle());
-    newTodo.setCategory(data.getCategory());
+    newTodo.setCategory(foundCategory);
 
-    return this.repo.save(newTodo);
+    this.repo.save(newTodo);
+    return newTodo;
   }
 
   public Optional<Todo> updateTodo(Long id, UpdateTodoDTO data) {
@@ -44,8 +55,8 @@ public class TodoService {
       foundTodo.setTitle(data.getTitle());
     }
 
-    if(data.getCategory() != null){
-      foundTodo.setCategory(data.getCategory());
+    if(data.getCategoryId() != null ){
+      foundTodo.setCategory(data.getCategoryId());
     }
 
     if(data.getIsArchived() != null){
