@@ -27,13 +27,9 @@ public class TodoService {
     return this.repo.findById(id);
   }
 
-  public Todo createTodo(CreateTodoDTO data) {
+  public Todo createTodo(CreateTodoDTO data) throws Exception {
     Todo newTodo = new Todo();
     Category foundCategory = this.categoryService.getById(data.getCategoryId());
-
-    if(foundCategory == null) {
-      System.out.println("this is the problem");
-    }
 
     newTodo.setTitle(data.getTitle());
     newTodo.setCategory(foundCategory);
@@ -43,28 +39,25 @@ public class TodoService {
   }
 
   public Optional<Todo> updateTodo(Long id, UpdateTodoDTO data) {
-    System.out.println("this is your data " + data.getTitle());
-
-    Optional<Todo> result = this.repo.findById(id);
-    if (result.isEmpty()) {
-      return result;
+    Optional<Todo> found= this.repo.findById(id);
+    if (found.isEmpty()) {
+      return found;
     }
-    Todo foundTodo = result.get();
+    Todo result = found.get();
 
     if(data.getTitle() != null){
-      foundTodo.setTitle(data.getTitle());
+      result.setTitle(data.getTitle());
     }
 
     if(data.getCategoryId() != null ){
-      foundTodo.setCategory(data.getCategoryId());
+      result.setCategory(data.getCategoryId());
     }
 
     if(data.getIsArchived() != null){
-      foundTodo.setIsArchived(data.getIsArchived());
+      result.setIsArchived(data.getIsArchived());
     }
 
-    System.out.println("Updating todo: " + foundTodo);
-    this.repo.save(foundTodo);
-    return Optional.of(foundTodo);
+    this.repo.save(result);
+    return Optional.of(result);
   }
 }

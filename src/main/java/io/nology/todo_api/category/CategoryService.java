@@ -37,4 +37,26 @@ public class CategoryService {
 
   }
 
+  public Optional<Category> updateCategory(Long id, UpdateCategoryDTO data) {
+  Optional<Category> found = this.repo.findById(id);
+  if (found.isEmpty()) {
+    return found;
+  }
+  Category result = found.get();
+
+  if(data.getName() != null){
+    result.setName(data.getName());
+  }
+
+  this.repo.save(result);
+  return Optional.of(result);
+
+  }
+
+  public boolean deleteById(Long id) {
+    this.repo.deleteById(id);
+    return true;
+  }
+
+
 }

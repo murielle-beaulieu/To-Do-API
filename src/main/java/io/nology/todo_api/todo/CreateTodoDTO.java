@@ -1,12 +1,14 @@
 package io.nology.todo_api.todo;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateTodoDTO {
 
   @NotBlank
   private String title;
 
+  @NotNull
   private Long category;
 
   public String getTitle() {

@@ -1,9 +1,11 @@
 package io.nology.todo_api.todo;
 
 import io.nology.todo_api.category.Category;
+import jakarta.validation.constraints.NotBlank;
 
 public class UpdateTodoDTO {
 
+  @NotBlank
   private String title;
 
   private Category category_id;
