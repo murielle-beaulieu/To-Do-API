@@ -1,21 +1,30 @@
 package io.nology.todo_api.todo;
 
-import io.nology.todo_api.todo.Todo.TodoCategory;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateTodoDTO {
 
   @NotBlank
   private String title;
 
-  private TodoCategory category;
+  @NotNull
+  private Long category;
 
   public String getTitle() {
     return title;
   }
 
-  public TodoCategory getCategory() {
+  public Long getCategoryId() {
     return category;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public void setCategory_id(Long category) {
+    this.category = category;
   }
 
 }

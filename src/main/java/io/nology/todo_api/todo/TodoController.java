@@ -40,7 +40,6 @@ public class TodoController {
     return new ResponseEntity<Todo>(todo, HttpStatus.OK);
   }
 
-
   @PostMapping
   public ResponseEntity<Todo> createTodo(@RequestBody @Valid CreateTodoDTO data) {
       Todo newTodo = this.todoService.createTodo(data);
@@ -54,5 +53,7 @@ public class TodoController {
     .orElseThrow(() -> new Exception("Todo with Id " + id + " does not exist"));
     return new ResponseEntity<Todo>(updatedTodo, HttpStatus.OK);
   }
+
+  // no delete, we want to avoid removing the record - we want to archive it via update
 
 }

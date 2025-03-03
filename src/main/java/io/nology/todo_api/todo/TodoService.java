@@ -5,13 +5,18 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import io.nology.todo_api.category.Category;
+import io.nology.todo_api.category.CategoryService;
+
 @Service
 public class TodoService {
 
   private TodoRepository repo;
+  private CategoryService categoryService;
 
-  TodoService(TodoRepository repo) {
-    this.repo = repo;
+  TodoService(TodoRepository repo, CategoryService categoryService) {
+      this.repo = repo;
+      this.categoryService = categoryService;
   }
 
   public List<Todo> getAll() {
@@ -22,38 +27,37 @@ public class TodoService {
     return this.repo.findById(id);
   }
 
-  public Todo createTodo(CreateTodoDTO data) {
+  public Todo createTodo(CreateTodoDTO data) throws Exception {
     Todo newTodo = new Todo();
+    Category foundCategory = this.categoryService.getById(data.getCategoryId());
 
     newTodo.setTitle(data.getTitle());
-    newTodo.setCategory(data.getCategory());
+    newTodo.setCategory(foundCategory);
 
-    return this.repo.save(newTodo);
+    this.repo.save(newTodo);
+    return newTodo;
   }
 
   public Optional<Todo> updateTodo(Long id, UpdateTodoDTO data) {
-    System.out.println("this is your data " + data.getTitle());
-
-    Optional<Todo> result = this.repo.findById(id);
-    if (result.isEmpty()) {
-      return result;
+    Optional<Todo> found= this.repo.findById(id);
+    if (found.isEmpty()) {
+      return found;
     }
-    Todo foundTodo = result.get();
+    Todo result = found.get();
 
     if(data.getTitle() != null){
-      foundTodo.setTitle(data.getTitle());
+      result.setTitle(data.getTitle());
     }
 
-    if(data.getCategory() != null){
-      foundTodo.setCategory(data.getCategory());
+    if(data.getCategoryId() != null ){
+      result.setCategory(data.getCategoryId());
     }
 
     if(data.getIsArchived() != null){
-      foundTodo.setIsArchived(data.getIsArchived());
+      result.setIsArchived(data.getIsArchived());
     }
 
-    System.out.println("Updating todo: " + foundTodo);
-    this.repo.save(foundTodo);
-    return Optional.of(foundTodo);
+    this.repo.save(result);
+    return Optional.of(result);
   }
 }
