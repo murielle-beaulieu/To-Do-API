@@ -1,6 +1,5 @@
 package io.nology.todo_api.todo;
 
-import io.nology.todo_api.category.Category;
 import jakarta.validation.constraints.NotBlank;
 
 public class UpdateTodoDTO {
@@ -8,7 +7,7 @@ public class UpdateTodoDTO {
   @NotBlank
   private String title;
 
-  private Category category_id;
+  private Long categoryId;
 
   private Boolean isArchived;
 
@@ -16,8 +15,8 @@ public class UpdateTodoDTO {
     return title;
   }
 
-  public Category getCategoryId() {
-    return category_id;
+  public Long getCategoryId() {
+    return categoryId;
   }
 
   public Boolean getIsArchived() {
@@ -28,12 +27,11 @@ public class UpdateTodoDTO {
     this.title = title;
   }
 
-  public void setCategoryId(Category category_id) {
-    this.category_id = category_id;
+  public void setCategoryId(Long categoryId) {
+    this.categoryId = categoryId;
   }
 
   public void setIsArchived(Boolean isArchived) {
     this.isArchived = isArchived;
   }
-
 }

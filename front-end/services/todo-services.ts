@@ -41,6 +41,8 @@ export const createTodo = async (data: TodoFormData) => {
 }
 
 export const editTodo = async (id: string, data: TodoFormData) => {
+  console.log(data.category);
+
   const response = await fetch('http://localhost:8080/todos/' + id + '/edit', {
     method: 'PUT',
     body: JSON.stringify(data),

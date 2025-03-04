@@ -10,7 +10,7 @@ export default function EditTodoPage() {
     if(id){
       editTodo(id, data)
       .then((todo) => {
-        console.log('todo ' + todo.id + 'has been updated');
+        console.log(todo.title + 'has been updated');
       }).catch((e) => console.log(e));
     }
   };

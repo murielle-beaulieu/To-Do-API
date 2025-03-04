@@ -6,7 +6,7 @@ interface CategoryFormProps {
   onSubmit: (data: CategoryFormData) => unknown;
 }
 
-export default function TodoForm({onSubmit}: CategoryFormProps) {
+export default function CategoryForm({onSubmit}: CategoryFormProps) {
   const {
     handleSubmit,
     register,

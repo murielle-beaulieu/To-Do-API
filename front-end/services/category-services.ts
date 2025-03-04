@@ -1,3 +1,5 @@
+import { CategoryFormData } from "../src/components/CategoryForm/schema";
+
 export interface Category {
   id: number;
   name: string;
