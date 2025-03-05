@@ -1,9 +1,10 @@
-import { createTodo } from "../../services/todo-services";
-import { TodoFormData } from "../components/TodoForm/schema";
-import TodoForm from "../components/TodoForm/TodoForm";
+import { createTodo } from "../../../services/todo-services";
+import { TodoFormData } from "../../components/TodoForm/schema";
+import TodoForm from "../../components/TodoForm/TodoForm";
 
 export default function NewTodoPage() {
   const onSubmit = (data: TodoFormData) => {
+    console.log(data);
     createTodo(data)
     .then((todo) => {
       console.log('created ' + todo.title);

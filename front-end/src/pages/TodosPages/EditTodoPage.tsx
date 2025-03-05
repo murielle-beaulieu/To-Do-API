@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
-import { editTodo} from "../../services/todo-services";
-import TodoForm from "../components/TodoForm/TodoForm";
-import { TodoFormData } from "../components/TodoForm/schema";
+import { editTodo} from "../../../services/todo-services";
+import TodoForm from "../../components/TodoForm/TodoForm";
+import { TodoFormData } from "../../components/TodoForm/schema";
 
 export default function EditTodoPage() {
   const {id} = useParams<{id: string}>();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {useParams} from "react-router";
-import { getTodoById, Todo } from "../../services/todo-services";
+import { getTodoById, Todo } from "../../../services/todo-services";
 
 export default function TodoPage() {
   const {id = 'x'} = useParams();

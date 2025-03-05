@@ -2,7 +2,6 @@ package io.nology.todo_api.todo;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.nology.todo_api.category.Category;
@@ -46,7 +45,7 @@ public class Todo {
   private Date archivedAt;
 
   @ManyToOne()
-  @JoinColumn(name = "category_id")
+  @JoinColumn(name = "categoryId")
   @JsonIgnoreProperties("todos")
   private Category category;
 

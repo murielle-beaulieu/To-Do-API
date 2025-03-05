@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Category, getCategory} from '../../services/category-services';
+import { Category, getCategory} from '../../../services/category-services';
 import { useParams } from 'react-router';
 
 const CategoryPage = () => {

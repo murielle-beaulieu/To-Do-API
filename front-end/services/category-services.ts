@@ -13,6 +13,7 @@ export const getAllCategories = async () => {
   if (!response.ok) {
     throw new Error('Failed to fetch');
   }
+  console.log(response);
   return (await response.json()) as Category[];
 }
 
@@ -20,6 +21,20 @@ export const getCategory = async (id: string) => {
   const response = await fetch('http://localhost:8080/categories/' + id);
   if (!response.ok) {
     throw new Error('Failed to fetch');
+  }
+  return (await response.json()) as Category;
+}
+
+export const createCategory = async (data: CategoryFormData) => {
+  const response = await fetch('http://localhost:8080/categories', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type':'application/json',
+    },
+  });
+  if(!response.ok){
+    throw new Error('Failed to create')
   }
   return (await response.json()) as Category;
 }

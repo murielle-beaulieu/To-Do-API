@@ -34,10 +34,13 @@ public class TodoService {
 
   public Todo createTodo(CreateTodoDTO data) throws Exception {
     Todo newTodo = new Todo();
-    Category foundCategory = this.categoryService.getById(data.getCategoryId());
+    if (data.getCategoryId() != null) {
+      Category category = categoryRepo.findById(data.getCategoryId())
+          .orElseThrow(() -> new RelationNotFoundException("Category not found"));
+          newTodo.setCategory(category);
+    }
 
     newTodo.setTitle(data.getTitle());
-    newTodo.setCategory(foundCategory);
 
     this.repo.save(newTodo);
     return newTodo;

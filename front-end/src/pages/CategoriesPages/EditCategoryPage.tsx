@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
-import CategoryForm from "../components/CategoryForm/CategoryForm";
-import { editCategory } from "../../services/category-services";
-import { CategoryFormData } from "../components/CategoryForm/schema";
+import CategoryForm from "../../components/CategoryForm/CategoryForm";
+import { editCategory } from "../../../services/category-services";
+import { CategoryFormData } from "../../components/CategoryForm/schema";
 
 export default function EditCategoryPage(){
   const {id} = useParams<{id: string}>();

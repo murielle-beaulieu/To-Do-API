@@ -4,10 +4,11 @@ import { schema, TodoFormData } from "./schema";
 import { useEffect, useState } from "react";
 import { Category, getAllCategories } from "../../../services/category-services";
 
-interface category {
-  name: string,
-  id: number
-}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// interface category {
+//   name: string,
+//   id: number
+// }
 
 interface TodoFormProps {
   onSubmit: (data: TodoFormData) => unknown;
