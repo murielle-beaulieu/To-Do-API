@@ -1,14 +1,13 @@
 package io.nology.todo_api.todo;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+// import jakarta.validation.constraints.NotNull;
 
 public class CreateTodoDTO {
 
   @NotBlank
   private String title;
 
-  @NotNull
   private Long category;
 
   public String getTitle() {
@@ -23,7 +22,7 @@ public class CreateTodoDTO {
     this.title = title;
   }
 
-  public void setCategory_id(Long category) {
+  public void setCategoryId(Long category) {
     this.category = category;
   }
 

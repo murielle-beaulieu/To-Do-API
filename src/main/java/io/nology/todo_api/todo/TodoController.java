@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,19 +42,24 @@ public class TodoController {
   }
 
   @PostMapping
-  public ResponseEntity<Todo> createTodo(@RequestBody @Valid CreateTodoDTO data) {
+  public ResponseEntity<Todo> createTodo(@RequestBody @Valid CreateTodoDTO data) throws Exception {
       Todo newTodo = this.todoService.createTodo(data);
       return new ResponseEntity<Todo>(newTodo, HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}/edit")
-  public ResponseEntity<Todo> updateTodo(@PathVariable Long id, @RequestBody UpdateTodoDTO data ) throws Exception {
-    Optional<Todo> found = this.todoService.updateTodo(id, data);
-    Todo updatedTodo = found
-    .orElseThrow(() -> new Exception("Todo with Id " + id + " does not exist"));
-    return new ResponseEntity<Todo>(updatedTodo, HttpStatus.OK);
+  public ResponseEntity<Todo> updateTodo(@PathVariable Long id, @RequestBody UpdateTodoDTO data) throws Exception {
+      Optional<Todo> found = this.todoService.updateTodo(id, data);
+      Todo updatedTodo = found
+          .orElseThrow(() -> new Exception("Todo with Id " + id + " does not exist"));
+      return new ResponseEntity<>(updatedTodo, HttpStatus.OK);
   }
 
   // no delete, we want to avoid removing the record - we want to archive it via update
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> archiveTodo(@PathVariable Long id){
+    this.todoService.archiveTodo(id);
+    return new ResponseEntity<String>("Todo successfully archived", HttpStatus.OK);
+  }
 
 }
