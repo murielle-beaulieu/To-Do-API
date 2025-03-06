@@ -19,5 +19,3 @@ You must add your own styling
 - `POST /todos`
 - `PUT /todos/:id`
 - `DELETE /todos/:id`
-
-# Build steps
