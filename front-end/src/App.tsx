@@ -8,14 +8,12 @@ import CategoriesPage from './pages/CategoriesPages/CategoriesPage'
 import CategoryPage from './pages/CategoriesPages/CategoryPage'
 import EditCategoryPage from './pages/CategoriesPages/EditCategoryPage'
 import NewCategoryPage from './pages/CategoriesPages/NewCategoryPage'
-import FilteredTodosPage from './pages/TodosPages/FilteredTodosPage'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/todos" element={<TodosPage/>} />
-        <Route path="/filtered" element={<FilteredTodosPage/>} />
         <Route path="/todos/:id" element={<TodoPage/>} />
         <Route path="/todos/new" element={<NewTodoPage/>} />
         <Route path="/todos/:id/edit" element={<EditTodoPage/>} />

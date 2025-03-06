@@ -17,7 +17,7 @@ export default function TodoPage() {
     console.log(todo);
 
     if (!todo) {
-      return "not accessing the todo";
+      return "Todo with id " + id + " does not exists";
     }
 
   return (

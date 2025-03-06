@@ -16,6 +16,7 @@ const CategoryPage = () => {
   return (
     <>
       <h1>Category Page</h1>
+      <h2>{category?.name}</h2>
     </>
   );
 };

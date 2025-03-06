@@ -3,8 +3,6 @@ package io.nology.todo_api.category;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import io.nology.todo_api.todo.Todo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

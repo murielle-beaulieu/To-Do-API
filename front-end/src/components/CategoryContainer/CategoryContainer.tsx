@@ -7,11 +7,15 @@ interface CategoryContainerProps {
 }
 
 export default function CategoryContainer({data}: CategoryContainerProps) {
+
+// links to the todos and working on only displaying the todos of that category
+// at the moment brings us to the todos page
+
   return (
-    <section>
-      <Link to={{pathname:"/filtered", search: `?category=${data.name}`}}>
+    <button >
+      <Link to={{pathname:"/todos/", search: `?category=${data.name}`}}>
         <h2>{data.name}</h2>
       </Link>
-    </section>
+    </button>
   )
 }

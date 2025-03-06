@@ -4,7 +4,6 @@ import TodoForm from "../../components/TodoForm/TodoForm";
 
 export default function NewTodoPage() {
   const onSubmit = (data: TodoFormData) => {
-    console.log(data);
     createTodo(data)
     .then((todo) => {
       console.log('created ' + todo.title);

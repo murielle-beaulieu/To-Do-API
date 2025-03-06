@@ -51,6 +51,8 @@ public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBo
   return new ResponseEntity<Category>(updatedCategory, HttpStatus.OK);
 }
 
+
+// not working at the moment, issues with the todo relationship
 @DeleteMapping("/{id}")
 public ResponseEntity<Void> deleteById(@PathVariable Long id){
   boolean deleted = this.categoryService.deleteById(id);

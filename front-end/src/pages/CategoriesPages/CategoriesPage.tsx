@@ -3,20 +3,21 @@ import { Category, getAllCategories } from '../../../services/category-services'
 import CategoryContainer from '../../components/CategoryContainer/CategoryContainer';
 
 const CategoriesPage = () => {
-  const [category, setCategory] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+
   useEffect(() => {
     getAllCategories()
-    .then((category) => setCategory(category))
+    .then((categories) => setCategories(categories))
     .catch((e) => console.log(e));
   }, []);
 
-  console.log(category);
+
+
+  console.log(categories);
   return (
     <>
       <h1>All Categories Page</h1>
-      <ul>
-        {category.map((category) => (<CategoryContainer data={category}/>))}
-      </ul>
+      {categories.map((category) => (<CategoryContainer data={category}/>))}
     </>
   );
 };
