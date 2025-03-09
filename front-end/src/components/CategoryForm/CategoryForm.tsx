@@ -6,22 +6,22 @@ interface CategoryFormProps {
   onSubmit: (data: CategoryFormData) => unknown;
 }
 
-export default function CategoryForm({onSubmit}: CategoryFormProps) {
+export default function CategoryForm({ onSubmit }: CategoryFormProps) {
   const {
     handleSubmit,
     register,
-    formState: {isSubmitSuccessful},
+    formState: { isSubmitSuccessful },
     reset,
-   } = useForm<CategoryFormData>({resolver: zodResolver(schema) });
+  } = useForm<CategoryFormData>({ resolver: zodResolver(schema) });
 
-   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-   isSubmitSuccessful && reset();
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  isSubmitSuccessful && reset();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label>Name</label>
-        <input type="text" {...register('name')} />
+        <input type="text" {...register("name")} />
       </div>
       <button>Submit</button>
     </form>

@@ -11,58 +11,66 @@ export interface Todo {
 }
 
 export const getAllTodos = async () => {
-  const response = await fetch('http://localhost:8080/todos');
+  const response = await fetch("http://localhost:8080/todos");
   if (!response.ok) {
-    throw new Error('Failed to fetch');
+    throw new Error("Failed to fetch");
   }
   return (await response.json()) as Todo[];
-}
+};
+
+export const getActiveTodos = async () => {
+  const response = await fetch("http://localhost:8080/todos/active");
+  if (!response.ok) {
+    throw new Error("Failed to fetch");
+  }
+  return (await response.json()) as Todo[];
+};
 
 export const getTodoById = async (id: string) => {
-  const response = await fetch('http://localhost:8080/todos/' + id);
+  const response = await fetch("http://localhost:8080/todos/" + id);
   if (!response.ok) {
-    throw new Error('Failed to fetch');
+    throw new Error("Failed to fetch");
   }
   return (await response.json()) as Todo;
-}
+};
 
 export const createTodo = async (data: TodoFormData) => {
-  const response = await fetch ('http://localhost:8080/todos',
-  { method: 'POST',
+  const response = await fetch("http://localhost:8080/todos", {
+    method: "POST",
     body: JSON.stringify(data),
     headers: {
-      'Content-Type':'application/json',
+      "Content-Type": "application/json",
     },
-  })
+  });
   if (!response.ok) {
-    throw new Error('Failed to create');
+    throw new Error("Failed to create");
   }
   return (await response.json()) as Todo;
-}
+};
 
 export const editTodo = async (id: string, data: TodoFormData) => {
-  const response = await fetch('http://localhost:8080/todos/' + id + '/edit', {
-    method: 'PUT',
+  const response = await fetch("http://localhost:8080/todos/" + id, {
+    method: "PUT",
     body: JSON.stringify(data),
     headers: {
-      'Content-Type':'application/json',
+      "Content-Type": "application/json",
     },
-  })
+  });
   if (!response.ok) {
-    throw new Error('Failed to update');
+    throw new Error("Failed to update");
   }
   return (await response.json()) as Todo;
-}
+};
 
 export const archiveTodo = async (id: string) => {
-  const response = await fetch('http://localhost:8080/todos/' + id, {
-    method: 'DELETE',
+  const response = await fetch("http://localhost:8080/todos/" + id, {
+    method: "DELETE",
     headers: {
-      'Content-Type':'application/json',
+      "Content-Type": "application/json",
     },
-  })
+  });
   if (!response.ok) {
-    throw new Error('Failed to update');
+    throw new Error("Failed to update");
   }
-  return (await response.json());
-}
+  return await response.json();
+};

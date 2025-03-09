@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Category, getCategory} from '../../../services/category-services';
-import { useParams } from 'react-router';
+import { useEffect, useState } from "react";
+import { Category, getCategory } from "../../../services/category-services";
+import { useParams } from "react-router";
 
 const CategoryPage = () => {
-  const {id = 'x'} = useParams();
+  const { id = "x" } = useParams();
   const [category, setCategory] = useState<Category | null>();
 
   useEffect(() => {
     getCategory(id)
-    .then((category) => setCategory(category))
-    .catch((e) => console.log(e));
+      .then((category) => setCategory(category))
+      .catch((e) => console.log(e));
   }, [id]);
 
   console.log(category);
