@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import "../TodosPages/TodosPage.css";
 import {
   Todo,
@@ -30,6 +30,8 @@ const TodosPage = () => {
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
 
   console.log(searchCategory);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllCategories()
@@ -64,6 +66,8 @@ const TodosPage = () => {
         console.log("created " + todo.title);
       })
       .catch((e) => console.log(e));
+      // medium happy with this
+      window.location.reload();
   };
 
   const categoryFormSubmit = (data: CategoryFormData) => {
@@ -72,13 +76,14 @@ const TodosPage = () => {
         console.log("created " + category.name);
       })
       .catch((e) => console.log(e));
+      window.location.reload();
   };
 
   function openModalTodo() {
-    setOpenTodoModal(true);
+    setOpenTodoModal(!openTodoModal);
   }
   function openModalCategory() {
-    setOpenCategoryModal(true);
+    setOpenCategoryModal(!openCategoryModal);
   }
 
   return (

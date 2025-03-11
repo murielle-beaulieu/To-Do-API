@@ -6,7 +6,6 @@ import {
   Category,
   getAllCategories,
 } from "../../../services/category-services";
-import "./TodoForm.css";
 
 interface TodoFormProps {
   onSubmit: (data: TodoFormData) => unknown;
@@ -43,6 +42,7 @@ export default function TodoForm({ onSubmit }: TodoFormProps) {
           <div>
             <label>Category</label>
             <select {...register("categoryId")}>
+              <option key={0} value="null">none</option>
               {categories?.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
