@@ -1,0 +1,36 @@
+h1 {
+  text-align: center;
+  justify-self: center;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main_panel {
+  width: 70%;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  margin: 4em;
+  max-height: 45em;
+  overflow-y: scroll;
+}
+
+.sidebar {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5em;
+  margin-left: 20em;
+  max-height: 43em;
+}
+
+.btn_round {
+  border-radius: 50%;
+  height: 5em;
+  width: 5em
+}

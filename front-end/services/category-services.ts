@@ -52,3 +52,13 @@ export const editCategory = async (id: string, data: CategoryFormData) => {
   }
   return (await response.json()) as Category;
 };
+
+export const deleteCategory = async (id: string) => {
+  const response = await fetch("http://localhost:8080/categories/" + id, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to update");
+  }
+  return (await response.json()) as Category;
+};

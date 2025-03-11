@@ -12,7 +12,7 @@ export default function CategoryContainer({ data }: CategoryContainerProps) {
 
   return (
     <button>
-      <Link to={{ pathname: "/todos", search: `?category=${data.name}` }}>
+      <Link to={{ pathname: "/categories/" + `${data.id}` }}>
         <h2>{data.name}</h2>
       </Link>
     </button>

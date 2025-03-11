@@ -5,7 +5,6 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.nology.todo_api.category.Category;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,9 +18,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-
 @Entity
-@Table(name="todos")
+@Table(name = "todos")
 
 public class Todo {
 
@@ -45,16 +43,16 @@ public class Todo {
   private Date archivedAt;
 
   @ManyToOne()
-  @JoinColumn(name = "categoryId")
+  @JoinColumn(name = "categoryId", nullable = true)
   @JsonIgnoreProperties("todos")
   private Category category;
 
   @Column
   private Boolean isArchived = false;
 
-    public Todo(String title, Category category) {
-      this.title = title;
-      this.category = category;
+  public Todo(String title, Category category) {
+    this.title = title;
+    this.category = category;
   }
 
   public Todo() {
@@ -89,7 +87,6 @@ public class Todo {
     return updatedAt;
   }
 
-
   public String getTitle() {
     return title;
   }
@@ -98,13 +95,20 @@ public class Todo {
     this.title = title;
   }
 
-
   public Boolean getIsArchived() {
     return this.isArchived;
   }
 
   public void setIsArchived(Boolean isArchived) {
     this.isArchived = isArchived;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setCategoryAsNull() {
+    this.category = null;
   }
 
 }

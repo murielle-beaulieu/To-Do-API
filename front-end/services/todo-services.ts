@@ -48,6 +48,16 @@ export const createTodo = async (data: TodoFormData) => {
   return (await response.json()) as Todo;
 };
 
+export const duplicateTodo = async (id: string) => {
+  const response = await fetch("http://localhost:8080/todos/" + id, {
+    method: "POST"
+  });
+  if (!response.ok) {
+    throw new Error("Failed to create");
+  }
+  return (await response.json()) as Todo;
+};
+
 export const editTodo = async (id: string, data: TodoFormData) => {
   const response = await fetch("http://localhost:8080/todos/" + id, {
     method: "PUT",

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Category, getAllCategories } from "../../../services/category-services";
 import CategoryContainer from "../../components/CategoryContainer/CategoryContainer";
+import CategoryList from "../../components/CategoryList/CategoryList";
 
 const CategoriesPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -15,9 +16,7 @@ const CategoriesPage = () => {
   return (
     <>
       <h1>All Categories Page</h1>
-      {categories.map((category) => (
-        <CategoryContainer data={category} />
-      ))}
+      <CategoryList data={categories} />
     </>
   );
 };
