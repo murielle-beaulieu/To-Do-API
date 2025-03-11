@@ -6,6 +6,6 @@ section {
   margin: 1em;
 }
 
-button {
-  background: pink;
+h3 {
+  text-transform: capitalize;
 }

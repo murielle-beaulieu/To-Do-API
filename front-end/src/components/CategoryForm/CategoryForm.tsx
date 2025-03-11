@@ -1,5 +1,5 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { CategoryFormData, schema } from "../CategoryForm/schema";
 
 interface CategoryFormProps {
@@ -18,12 +18,17 @@ export default function CategoryForm({ onSubmit }: CategoryFormProps) {
   isSubmitSuccessful && reset();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Name</label>
-        <input type="text" {...register("name")} />
-      </div>
-      <button>Submit</button>
-    </form>
+    <>
+      <h2>Create a category:</h2>
+      <article>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label>Name</label>
+            <input type="text" {...register("name")} />
+          </div>
+          <button className="submit">Submit</button>
+        </form>
+      </article>
+    </>
   );
 }

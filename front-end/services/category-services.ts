@@ -60,5 +60,4 @@ export const deleteCategory = async (id: string) => {
   if (!response.ok) {
     throw new Error("Failed to update");
   }
-  return (await response.json()) as Category;
 };

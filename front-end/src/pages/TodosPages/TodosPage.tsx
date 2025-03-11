@@ -12,13 +12,13 @@ import {
   createCategory,
   getAllCategories,
 } from "../../../services/category-services";
-import TodoContainer from "../../components/TodoContainer/TodoContainer";
 import CategoryList from "../../components/CategoryList/CategoryList";
 import Modal from "../../components/Modal/Modal";
 import TodoForm from "../../components/TodoForm/TodoForm";
 import { TodoFormData } from "../../components/TodoForm/schema";
 import CategoryForm from "../../components/CategoryForm/CategoryForm";
 import { CategoryFormData } from "../../components/CategoryForm/schema";
+import TodoContainer from "../../components/TodoContainer/TodoContainer";
 
 const TodosPage = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -83,19 +83,24 @@ const TodosPage = () => {
 
   return (
     <>
-      <h1>All ToDos Page</h1>
+      <h1>Things to do</h1>
       <div className="main">
         <section className="sidebar">
           <CategoryList data={categories} />
-          <div style={{ margin: "1em" }}>
-            <button onClick={() => onClick("completed")}>
-              See All Completed
+          <div className="categories_options">
+            <button onClick={() => onClick("completed")} className="filter">
+              <h3>See All Completed</h3>
             </button>
-            <button onClick={() => onClick("all")}>See All Active</button>
-            <button onClick={() => openModalCategory()}>
-              Create new category
+            <button onClick={() => onClick("all")} className="filter">
+              <h3>See All Active</h3>
             </button>
           </div>
+          <button
+            onClick={() => openModalCategory()}
+            className="categories_create"
+          >
+            <h3>Create new category</h3>
+          </button>
         </section>
         <div className="main_panel">
           {activeTodos
@@ -125,9 +130,9 @@ const TodosPage = () => {
           <CategoryForm onSubmit={categoryFormSubmit} />
         </Modal>
       )}
-      <button className="btn_round" onClick={() => openModalTodo()}>
-        +
-      </button>
+        <button className="btn_round" onClick={() => openModalTodo()}>
+          +
+        </button>
     </>
   );
 };

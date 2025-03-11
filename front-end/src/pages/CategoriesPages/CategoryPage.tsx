@@ -22,6 +22,9 @@ const CategoryPage = () => {
     deleteCategory(`${category?.id}`)
       .then()
       .catch((e) => console.log(e));
+    setTimeout(() => {
+      navigate("/categories");
+    }, 1);
   }
 
   return (

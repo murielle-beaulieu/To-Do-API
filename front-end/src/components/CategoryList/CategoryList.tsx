@@ -9,8 +9,9 @@ interface CategoryListProps {
 export default function CategoryList ({data}: CategoryListProps) {
   return (
     <div className="list_container">
+      <h2>Filter by categories</h2>
       {data.map((category) => (
-        <CategoryContainer data={category} />
+        <CategoryContainer data={category} key={category.id} />
       ))}
     </div>
   )

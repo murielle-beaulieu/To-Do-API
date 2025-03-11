@@ -6,6 +6,7 @@ import {
   Category,
   getAllCategories,
 } from "../../../services/category-services";
+import "./TodoForm.css";
 
 interface TodoFormProps {
   onSubmit: (data: TodoFormData) => unknown;
@@ -31,22 +32,27 @@ export default function TodoForm({ onSubmit }: TodoFormProps) {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Title</label>
-        <input type="text" {...register("title")} />
-      </div>
-      <div>
-        <label>Category</label>
-        <select {...register("categoryId")}>
-          {categories?.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <button>Submit</button>
-    </form>
+    <>
+      <h2>Create a todo:</h2>
+      <article>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label>Title</label>
+            <input type="text" {...register("title")} />
+          </div>
+          <div>
+            <label>Category</label>
+            <select {...register("categoryId")}>
+              {categories?.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button className="submit">Submit</button>
+        </form>
+      </article>
+    </>
   );
 }
