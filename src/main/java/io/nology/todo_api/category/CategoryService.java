@@ -2,9 +2,11 @@ package io.nology.todo_api.category;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import io.nology.todo_api.todo.Todo;
 
 @Service
 public class CategoryService {
@@ -21,7 +23,7 @@ public class CategoryService {
 
   public Category getById(Long id) {
     Optional<Category> found = this.repo.findById(id);
-    if (!found.isPresent()){
+    if (!found.isPresent()) {
       return null;
     }
 
@@ -31,31 +33,39 @@ public class CategoryService {
   public Category createCategory(CreateCategoryDTO data) {
     Category newCategory = new Category();
 
-    newCategory.setName(data.getName());
+    newCategory.setName(data.getName().toLowerCase());
 
     return this.repo.save(newCategory);
-
   }
 
   public Optional<Category> updateCategory(Long id, UpdateCategoryDTO data) {
-  Optional<Category> found = this.repo.findById(id);
-  if (found.isEmpty()) {
-    return found;
+    Optional<Category> found = this.repo.findById(id);
+    if (found.isEmpty()) {
+      return found;
+    }
+    Category result = found.get();
+
+    if (data.getName() != null) {
+      result.setName(data.getName().toLowerCase());
+    }
+
+    this.repo.save(result);
+    return Optional.of(result);
   }
-  Category result = found.get();
 
-  if(data.getName() != null){
-    result.setName(data.getName());
+
+  public String setTodosCategoriesAsNull (Long id) {
+    Optional<Category> foundCat = this.repo.findById(id);
+    Category category = foundCat.get();
+    List<Todo> todos = category.getTodos();
+    todos.stream().peek((todo) -> todo.setCategoryAsNull()).collect(Collectors.toList());
+    // // peek is a method that allows for side effect
+    // List<Todo> c = b.stream().peek((todo) -> todo.setTitle("will be null")).collect(Collectors.toList()) ;
+    // // we want to map through all of them and change category to null
+    return "heyy";
   }
 
-  this.repo.save(result);
-  return Optional.of(result);
-
-  }
-
-  public boolean deleteById(Long id) {
+  public void deleteById(Long id) {
     this.repo.deleteById(id);
-    return true;
   }
-
 }
