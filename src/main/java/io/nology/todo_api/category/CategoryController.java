@@ -1,10 +1,5 @@
 package io.nology.todo_api.category;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.validation.Valid;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categories")
@@ -40,7 +39,7 @@ public class CategoryController {
   @PostMapping
   public ResponseEntity<Category> createCategory(@RequestBody @Valid CreateCategoryDTO data) {
     Category newCategory = this.categoryService.createCategory(data);
-    return new ResponseEntity<Category>(newCategory, HttpStatus.CREATED);
+    return new ResponseEntity<>(newCategory, HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}")
@@ -49,7 +48,7 @@ public class CategoryController {
     Optional<Category> foundCategory = this.categoryService.updateCategory(id, data);
     Category updatedCategory = foundCategory
         .orElseThrow(() -> new Exception("Category with Id " + id + " does not exist"));
-    return new ResponseEntity<Category>(updatedCategory, HttpStatus.OK);
+    return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")

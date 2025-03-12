@@ -75,12 +75,8 @@ export const editTodo = async (id: string, data: TodoFormData) => {
 export const archiveTodo = async (id: string) => {
   const response = await fetch("http://localhost:8080/todos/" + id, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
   if (!response.ok) {
     throw new Error("Failed to update");
   }
-  return await response.json();
 };

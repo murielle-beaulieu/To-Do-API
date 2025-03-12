@@ -9,13 +9,15 @@ import {
 
 interface TodoFormProps {
   onSubmit: (data: TodoFormData) => unknown;
+  title: string;
+  existingValue: string;
 }
 
-export default function TodoForm({ onSubmit }: TodoFormProps) {
+export default function TodoForm({ onSubmit, title, existingValue }: TodoFormProps) {
   const {
     handleSubmit,
     register,
-    formState: { isSubmitSuccessful },
+    formState: { isSubmitSuccessful, errors },
     reset,
   } = useForm<TodoFormData>({ resolver: zodResolver(schema) });
 
@@ -31,22 +33,29 @@ export default function TodoForm({ onSubmit }: TodoFormProps) {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Title</label>
-        <input type="text" {...register("title")} />
-      </div>
-      <div>
-        <label>Category</label>
-        <select {...register("categoryId")}>
-          {categories?.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <button>Submit</button>
-    </form>
+    <>
+      <h2>{title} todo:</h2>
+      <article>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label>Title</label>
+            <input type="text" defaultValue={existingValue} {...register("title")} />
+            {errors.title && <small style={{color: 'red'}}>{errors.title.message}</small>}
+          </div>
+          <div>
+            <label>Category</label>
+            <select {...register("categoryId")}>
+              <option key={0} value="null">none</option>
+              {categories?.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button className="submit">Submit</button>
+        </form>
+      </article>
+    </>
   );
 }
