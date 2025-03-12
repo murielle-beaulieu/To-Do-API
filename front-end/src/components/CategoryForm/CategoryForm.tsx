@@ -4,9 +4,11 @@ import { CategoryFormData, schema } from "../CategoryForm/schema";
 
 interface CategoryFormProps {
   onSubmit: (data: CategoryFormData) => unknown;
+  title: string;
+  existingValue: string;
 }
 
-export default function CategoryForm({ onSubmit }: CategoryFormProps) {
+export default function CategoryForm({ onSubmit, title, existingValue }: CategoryFormProps) {
   const {
     handleSubmit,
     register,
@@ -19,12 +21,12 @@ export default function CategoryForm({ onSubmit }: CategoryFormProps) {
 
   return (
     <>
-      <h2>Create a category:</h2>
+      <h2>{title} category:</h2>
       <article>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label>Name</label>
-            <input type="text" {...register("name")} />
+            <input type="text" defaultValue={existingValue} {...register("name")} />
           </div>
           <button className="submit">Submit</button>
         </form>

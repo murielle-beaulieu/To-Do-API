@@ -53,19 +53,15 @@ public class CategoryService {
     return Optional.of(result);
   }
 
-
-  public String setTodosCategoriesAsNull (Long id) {
+  public void setTodosCategoriesAsNull(Long id) {
     Optional<Category> foundCat = this.repo.findById(id);
     Category category = foundCat.get();
     List<Todo> todos = category.getTodos();
     todos.stream().peek((todo) -> todo.setCategoryAsNull()).collect(Collectors.toList());
-    // // peek is a method that allows for side effect
-    // List<Todo> c = b.stream().peek((todo) -> todo.setTitle("will be null")).collect(Collectors.toList()) ;
-    // // we want to map through all of them and change category to null
-    return "heyy";
   }
 
   public void deleteById(Long id) {
     this.repo.deleteById(id);
   }
+
 }

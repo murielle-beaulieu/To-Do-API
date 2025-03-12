@@ -31,7 +31,7 @@ h1 {
   margin-top: 5em;
   min-height: 43em;
   height: auto;
-  border: 0.25em solid  rgb(129, 171, 244);
+  border: 0.25em solid rgb(129, 171, 244);
   border-radius: 1em;
   padding: 2em;
 }
@@ -55,7 +55,8 @@ h1 {
   display: flex;
   width: 100%;
   gap: 1em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
+  margin-top: 2em;
 }
 
 .categories_create {
@@ -63,11 +64,19 @@ h1 {
   width: 100%;
   font-size: 1em;
   color: rgb(56, 115, 217);
-  border: 0.20em solid rgb(56, 115, 217);
+  border: 0.2em solid rgb(56, 115, 217);
 }
 
 .categories_create:hover {
   color: white;
   background-color: rgb(56, 115, 217);
   transition: 0.2s;
+}
+
+.done_title {
+  color: rgb(117, 118, 120);
+}
+
+.display {
+  line-height: 0.75em;
 }

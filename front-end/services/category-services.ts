@@ -58,6 +58,6 @@ export const deleteCategory = async (id: string) => {
     method: "DELETE",
   });
   if (!response.ok) {
-    throw new Error("Failed to update");
+    throw new Error("Failed to delete");
   }
 };

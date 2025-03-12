@@ -69,7 +69,6 @@ public class TodoController {
       return Optional.of(updated);
   }
 
-  // no delete, we want to avoid removing the record - we want to archive it via update
   @DeleteMapping("/{id}")
   public void archiveTodo(@PathVariable Long id){
     this.todoService.archiveTodo(id);

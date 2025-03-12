@@ -1,5 +1,4 @@
 :root {
-  /* background-color: rgb(215, 237, 164); */
   background-color: rgb(246, 251, 255);
   color: rgb(56, 115, 217);
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -28,8 +27,4 @@ button:hover {
 a {
   text-decoration: none;
   font-size: 1.25em;
-}
-
-h2 {
-  color: rgb(56, 115, 217);
 }

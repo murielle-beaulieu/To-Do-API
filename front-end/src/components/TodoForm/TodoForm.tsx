@@ -9,9 +9,11 @@ import {
 
 interface TodoFormProps {
   onSubmit: (data: TodoFormData) => unknown;
+  title: string;
+  existingValue: string;
 }
 
-export default function TodoForm({ onSubmit }: TodoFormProps) {
+export default function TodoForm({ onSubmit, title, existingValue }: TodoFormProps) {
   const {
     handleSubmit,
     register,
@@ -32,12 +34,12 @@ export default function TodoForm({ onSubmit }: TodoFormProps) {
 
   return (
     <>
-      <h2>Create a todo:</h2>
+      <h2>{title} todo:</h2>
       <article>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label>Title</label>
-            <input type="text" {...register("title")} />
+            <input type="text" defaultValue={existingValue} {...register("title")} />
           </div>
           <div>
             <label>Category</label>
