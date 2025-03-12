@@ -29,15 +29,16 @@ export default function CategoryList({
   const [categoryId, setCategoryId] = useState("");
   const [show, setShow] = useState(false);
 
-  function editCategoryFormSubmit( data: CategoryFormData) {
+  function editCategoryFormSubmit(data: CategoryFormData) {
     editCategory(categoryId, data)
       .then((category) => {
         console.log("category " + category.id + " has been updated");
       })
       .catch((e) => console.log(e));
+    window.location.reload();
   }
 
-  function openModal(id:string) {
+  function openModal(id: string) {
     setShow(!show);
     setCategoryId(id);
   }
@@ -48,25 +49,26 @@ export default function CategoryList({
       <div className="list_container">
         <h2>Filter by categories</h2>
         {categories.map((category) => (
-            <div className="btn_div" key={category.id}>
-              <div>
+          <div className="btn_div" key={category.id}>
+            <button
+              className="btn_category"
+              onClick={() => onSearch(category.name)}
+            >
+              <h3>{category.name}</h3>
+            </button>
+            <div>
               <button
-                className="btn_category"
-                onClick={() => onSearch(category.name)}
+                className="btn_x"
+                onClick={() => openModal(`${category.id}`)}
               >
-                    </button>
-                    </div>
-                <h3>{category.name}</h3>
-                <div>
-                  <button className="btn_x" onClick={() => openModal(`${category.id}`)}>
-                    <FontAwesomeIcon icon={faPen} />
-                  </button>
-                  <button
-                    className="btn_x"
-                    onClick={() => deleting(`${category.id}`)}
-                  >
-                    <FontAwesomeIcon icon={faX} />
-                  </button>
+                <FontAwesomeIcon icon={faPen} />
+              </button>
+              <button
+                className="btn_x"
+                onClick={() => deleting(`${category.id}`)}
+              >
+                <FontAwesomeIcon icon={faX} />
+              </button>
             </div>
           </div>
         ))}

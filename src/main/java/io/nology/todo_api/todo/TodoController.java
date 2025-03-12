@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/todos")
 public class TodoController {
 
-  private final TodoService todoService;
+  private TodoService todoService;
 
   TodoController(TodoService todoService){
     this.todoService = todoService;

@@ -78,6 +78,7 @@ const TodosPage = () => {
   function openModalTodo() {
     setOpenTodoModal(!openTodoModal);
   }
+
   function openModalCategory() {
     setOpenCategoryModal(!openCategoryModal);
   }

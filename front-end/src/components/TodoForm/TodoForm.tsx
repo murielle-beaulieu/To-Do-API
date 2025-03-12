@@ -17,7 +17,7 @@ export default function TodoForm({ onSubmit, title, existingValue }: TodoFormPro
   const {
     handleSubmit,
     register,
-    formState: { isSubmitSuccessful },
+    formState: { isSubmitSuccessful, errors },
     reset,
   } = useForm<TodoFormData>({ resolver: zodResolver(schema) });
 
@@ -40,6 +40,7 @@ export default function TodoForm({ onSubmit, title, existingValue }: TodoFormPro
           <div>
             <label>Title</label>
             <input type="text" defaultValue={existingValue} {...register("title")} />
+            {errors.title && <small style={{color: 'red'}}>{errors.title.message}</small>}
           </div>
           <div>
             <label>Category</label>

@@ -8,11 +8,15 @@ interface CategoryFormProps {
   existingValue: string;
 }
 
-export default function CategoryForm({ onSubmit, title, existingValue }: CategoryFormProps) {
+export default function CategoryForm({
+  onSubmit,
+  title,
+  existingValue,
+}: CategoryFormProps) {
   const {
     handleSubmit,
     register,
-    formState: { isSubmitSuccessful },
+    formState: { isSubmitSuccessful, errors },
     reset,
   } = useForm<CategoryFormData>({ resolver: zodResolver(schema) });
 
@@ -26,7 +30,14 @@ export default function CategoryForm({ onSubmit, title, existingValue }: Categor
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label>Name</label>
-            <input type="text" defaultValue={existingValue} {...register("name")} />
+            <input
+              type="text"
+              defaultValue={existingValue}
+              {...register("name")}
+            />
+            {errors.name && (
+              <small style={{ color: "red" }}>{errors.name.message}</small>
+            )}
           </div>
           <button className="submit">Submit</button>
         </form>

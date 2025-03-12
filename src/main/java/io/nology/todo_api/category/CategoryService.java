@@ -34,7 +34,6 @@ public class CategoryService {
     Category newCategory = new Category();
 
     newCategory.setName(data.getName().toLowerCase());
-
     return this.repo.save(newCategory);
   }
 
@@ -45,9 +44,7 @@ public class CategoryService {
     }
     Category result = found.get();
 
-    if (data.getName() != null) {
-      result.setName(data.getName().toLowerCase());
-    }
+    result.setName(data.getName().toLowerCase());
 
     this.repo.save(result);
     return Optional.of(result);
@@ -57,6 +54,8 @@ public class CategoryService {
     Optional<Category> foundCat = this.repo.findById(id);
     Category category = foundCat.get();
     List<Todo> todos = category.getTodos();
+    // Note: this peek() call will modify the todos in the stream by setting
+    // category as null
     todos.stream().peek((todo) -> todo.setCategoryAsNull()).collect(Collectors.toList());
   }
 
