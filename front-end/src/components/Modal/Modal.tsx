@@ -1,11 +1,14 @@
 import { useState } from "react";
 import "./Modal.css";
 
-export default function Modal({ children }) {
+interface ModalProps {
+  children: unknown;
+}
+
+export default function Modal({ children }: ModalProps) {
   const [close, setClose] = useState(false);
 
   const closing = () => {
-    console.log(open);
     setClose(true);
   };
 
@@ -14,10 +17,10 @@ export default function Modal({ children }) {
       return (
         <div className="overlay">
           <div className="modal">
-            {children}
             <button className="close_modal" onClick={() => closing()}>
-              close
+              x
             </button>
+            <>{children}</>
           </div>
         </div>
       );

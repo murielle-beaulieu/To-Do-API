@@ -1,6 +1,40 @@
 .list_container {
+  text-align: center;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
+  gap: 1em;
+  margin-top: 1em;
+  margin-bottom: 2em;
+
+}
+.btn_div {
+  width: 100%;
+  display: flex;
+  background-color:rgb(129, 171, 244);
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5em;
+  padding:0.25em;
+}
+
+.btn_category {
+  display: flex;
+  font-size: 1em;
+  justify-content: space-between;
+  width: 70%;
+}
+
+
+.btn_x {
+  width: 20%;
+  background-color: white;
+  color: rgb(129, 171, 244);
+  font-size: 1.25em;
+  width: 1.9em;
+  height: 1.9em;
+  padding: 0;
+  margin: 0.25em;
 }

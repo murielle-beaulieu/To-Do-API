@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
 import "../TodosPages/TodosPage.css";
 import {
   Todo,
@@ -12,13 +11,14 @@ import {
   createCategory,
   getAllCategories,
 } from "../../../services/category-services";
-import TodoContainer from "../../components/TodoContainer/TodoContainer";
 import CategoryList from "../../components/CategoryList/CategoryList";
 import Modal from "../../components/Modal/Modal";
 import TodoForm from "../../components/TodoForm/TodoForm";
 import { TodoFormData } from "../../components/TodoForm/schema";
 import CategoryForm from "../../components/CategoryForm/CategoryForm";
 import { CategoryFormData } from "../../components/CategoryForm/schema";
+import TodoContainer from "../../components/TodoContainer/TodoContainer";
+import { useSearchParams } from "react-router";
 
 const TodosPage = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -28,8 +28,6 @@ const TodosPage = () => {
   const [searchFilter, setSearchFilter] = useState("all");
   const [openTodoModal, setOpenTodoModal] = useState(false);
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
-
-  console.log(searchCategory);
 
   useEffect(() => {
     getAllCategories()
@@ -51,12 +49,13 @@ const TodosPage = () => {
       .catch((e) => console.log(e));
   }, []);
 
-  function onClick(category: string) {
+  const search = (category: string) => {
     const params = new URLSearchParams();
     params.set("category", `${category}`);
     setSearchFilter(`${category}`);
     setSearchCategory(params);
-  }
+    console.log(searchCategory);
+  };
 
   const todoFormSubmit = (data: TodoFormData) => {
     createTodo(data)
@@ -64,6 +63,7 @@ const TodosPage = () => {
         console.log("created " + todo.title);
       })
       .catch((e) => console.log(e));
+    window.location.reload();
   };
 
   const categoryFormSubmit = (data: CategoryFormData) => {
@@ -72,57 +72,68 @@ const TodosPage = () => {
         console.log("created " + category.name);
       })
       .catch((e) => console.log(e));
+    window.location.reload();
   };
 
   function openModalTodo() {
-    setOpenTodoModal(true);
+    setOpenTodoModal(!openTodoModal);
   }
+
   function openModalCategory() {
-    setOpenCategoryModal(true);
+    setOpenCategoryModal(!openCategoryModal);
   }
 
   return (
     <>
-      <h1>All ToDos Page</h1>
+      <h1>Things to do</h1>
       <div className="main">
         <section className="sidebar">
-          <CategoryList data={categories} />
-          <div style={{ margin: "1em" }}>
-            <button onClick={() => onClick("completed")}>
-              See All Completed
-            </button>
-            <button onClick={() => onClick("all")}>See All Active</button>
-            <button onClick={() => openModalCategory()}>
-              Create new category
-            </button>
-          </div>
+          <CategoryList categories={categories} onSearch={search} />
+          <button
+            onClick={() => openModalCategory()}
+            className="categories_create">
+            <h3>Create new category</h3>
+          </button>
         </section>
         <div className="main_panel">
+          {searchFilter == "completed" ? (
+            <h2 className="done_title">Completed Tasks</h2>
+          ) : (
+            <div className="display">
+              <h2>Active Tasks</h2>
+              <h3>Category: {searchFilter}</h3>
+            </div>
+          )}
           {activeTodos
             .filter((activeTodo) => activeTodo.category?.name == searchFilter)
             .map((todo) => (
-              <TodoContainer key={todo.id} todo={todo} />
+              <TodoContainer key={todo.id} todo={todo} extraClass={""} />
             ))}
-
           {searchFilter == "all" &&
             activeTodos.map((todo) => (
-              <TodoContainer key={todo.id} todo={todo} />
+              <TodoContainer key={todo.id} todo={todo} extraClass={""} />
             ))}
 
           {searchFilter == "completed" &&
             todos
               .filter((todo) => todo.isArchived == true)
-              .map((todo) => <TodoContainer key={todo.id} todo={todo} />)}
+              .map((todo) => (
+                <TodoContainer
+                  key={todo.id}
+                  todo={todo}
+                  extraClass={"done_todo"}
+                />
+              ))}
         </div>
       </div>
       {openTodoModal && (
         <Modal>
-          <TodoForm onSubmit={todoFormSubmit} />
+          <TodoForm onSubmit={todoFormSubmit} title={"Create a "} existingValue={""}/>
         </Modal>
       )}
       {openCategoryModal && (
         <Modal>
-          <CategoryForm onSubmit={categoryFormSubmit} />
+          <CategoryForm onSubmit={categoryFormSubmit} title={"Create a "} existingValue={""} />
         </Modal>
       )}
       <button className="btn_round" onClick={() => openModalTodo()}>
